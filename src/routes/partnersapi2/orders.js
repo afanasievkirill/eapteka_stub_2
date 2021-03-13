@@ -2,18 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 // @route    POST /partners_api_2/orders
-// @desc     Create order
+// @desc     Create orders
 // @access   Public
-
 router.post('/', (req,res) => {
-    const guid = req.body.orders[0].id
+    const json_entities = req.body.orders;
+    const ids = [];
+    json_entities.forEach( function(entity) {
+        ids.push(entity.id);
+    });
+    console.log(ids)
     const orders = {
-        accepted: [
-            guid
-        ]
-
+        accepted: ids
     }
-    console.log(guid)
     return res.status(200).json(orders)
 })
 
