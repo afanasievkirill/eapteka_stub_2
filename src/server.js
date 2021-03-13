@@ -4,6 +4,8 @@ const app = express();
 
 app.use(express.json());
 
+app.use('/partners_api_2/orders', require('./routes/partnersapi2/orders'))
+
 app.get("/test", (req, res) => {
     res.send("Our api server is working correctly");
 });
