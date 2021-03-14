@@ -1,25 +1,21 @@
-const express = require("express");
+const express = require("express")
+const pino = require('pino')
+const expressPino = require('express-pino-logger')
 
-const app = express();
+const logger = pino({level: process.env.LOG_LEVEL || 'info'})
+const expressLogger = expressPino({logger})
 
-app.use(express.json());
+const app = express()
 
-app.use('/partners_api_2/orders', require('./routes/api/partners/2_0/orders'))
+app.use(express.json())
+app.use(expressLogger)
+
+app.use('/partners_api_2/invoice', require('./routes/api/partners/2_0/invoice'))
 
 app.get("/test", (req, res) => {
-    res.send("Our api server is working correctly");
+    res.send("Our api server is working correctly")
 });
 
-app.post('/orders', (req, res) => {
-    console.log(req.body)
-    return res.status(200).send('')
-})
-
-app.post('/invoice', (req, res) => {
-    console.log(req.body)
-    return res.status(200).json(req.body)
-})
-
 app.listen(3000, () => {
-    console.log("Started api service");
+    console.log("Started api service")
 });
