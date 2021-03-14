@@ -5,11 +5,11 @@ const router = express.Router();
 // @desc     Create orders
 // @access   Public
 router.post('/', (req,res) => {
-    const json_entities = req.body.orders;
-    const ids = [];
+    const json_entities = req.body.orders
+    const ids = []
     json_entities.forEach( function(entity) {
-        ids.push(entity.id);
-    });
+        ids.push(entity.id)
+    })
     console.log(ids)
     const orders = {
         accepted: ids
