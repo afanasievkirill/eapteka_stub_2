@@ -3,11 +3,11 @@ const router = express.Router();
 
 const token = require('../../../../middleware/token')
 
-// @route    POST /partners_api_2/invoice
+// @route    POST /partners_api_2/invoice/list
 // @desc     Create invoice
 // @access   Public
-router.post('/', token, (req,res) => {
-    const json_entities = req.body
+router.post('/list', token, (req,res) => {
+    const json_entities = req.body.invoice
     const ids = []
     json_entities.forEach( function(entity) {
         ids.push(entity.id)
