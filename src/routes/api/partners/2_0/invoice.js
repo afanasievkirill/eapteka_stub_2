@@ -7,7 +7,7 @@ const token = require('../../../../middleware/token')
 // @desc     Create invoice
 // @access   Public
 router.post('/', token, (req,res) => {
-    const json_entities = req.body.orders
+    const json_entities = req.body
     const ids = []
     json_entities.forEach( function(entity) {
         ids.push(entity.id)
