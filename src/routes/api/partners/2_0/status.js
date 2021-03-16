@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const token = require('../../../../middleware/token')
 
-const {body, validationResult} = require('express-validator')
+const token = require('../../../../middleware/token')
+const {validate} = require('../../../../middleware/status')
 
 // @route    POST /partners_api_2/order_status
 // @desc     Update order status
@@ -10,17 +10,9 @@ const {body, validationResult} = require('express-validator')
 router.post('/',
     [
         token,
-        [
-            body('*.status', 'Status is not numeric').not().isEmpty(),
-            body('*.status', 'Status is not numeric').isLength({min: 1, max:2})
-        ]
+        validate
     ],
     (req, res) => {
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            return res.status(400).json({errors: errors.array()})
-        }
-
         const json_entities = req.body
         console.log(json_entities)
         const ids = []
