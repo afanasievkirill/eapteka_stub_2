@@ -11,6 +11,7 @@ app.use(express.json())
 app.use(expressLogger)
 
 app.use('/partners_api_2/invoice', require('./routes/api/partners/2_0/invoice'))
+app.use('/partners_api_2/order_status', require('./routes/api/partners/2_0/status'))
 
 app.get("/test", (req, res) => {
     res.send("Our api server is working correctly")
