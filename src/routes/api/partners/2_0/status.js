@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const token = require('../../../../middleware/token')
-const {validate} = require('../../../../middleware/status')
+const validateApiKey = require('../../../../middleware/token')
+const {validateOrdersBody, validateOrdersGuid} = require('../../../../middleware/status')
 
 // @route    POST /partners_api_2/order_status
 // @desc     Update order status
 // @access   Private
 router.post('/',
     [
-        token,
-        validate
+        validateApiKey,
+        validateOrdersBody,
+        validateOrdersGuid
     ],
     (req, res) => {
         const json_entities = req.body
