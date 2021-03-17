@@ -1,8 +1,20 @@
 const {body, validationResult} = require('express-validator')
 
 exports.validate = [
-    body('*.status', 'Status is not numeric').not().isEmpty(),
-    body('*.status', 'Status is not numeric').isLength({min: 1, max: 2}),
+    body('*.order_id').not().isEmpty(),
+    body('*.status', 'Status is empty').not().isEmpty(),
+    body('*.status', 'Status is not have enum value').isIn([
+        'CREATED',
+        'RECEIVED',
+        'RESERVED',
+        'DELIVERED',
+        'READY',
+        'SOLD',
+        'REJECTED',
+        'CANCELED',
+        'TORETURN',
+        'RETURNED'
+    ]),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty())
